@@ -2,7 +2,7 @@
     @if (isset($microposts))
         <ul class="list-none">
             @foreach ($microposts as $micropost)
-                <li class="flex items-start gap-x-2 mb-4">
+                <li class="flex items-start gap-x-2 mb-2">
                     {{-- 投稿の所有者のメールアドレスをもとにGravatarを取得して表示 --}}
                     <div class="avatar">
                         <div class="w-12 rounded">
@@ -15,17 +15,23 @@
                             <a class="link link-hover text-info" href="{{ route('users.show', $micropost->user->id) }}">{{ $micropost->user->name }}</a>
                             <span class="text-muted text-gray-500">posted at {{ $micropost->created_at }}</span>
                         </div>
-                        <div>
-                            {{-- 投稿内容 --}}
-                            <p class="mb-0">{!! nl2br(e($micropost->content)) !!}</p>
-                        </div>
-                        <div>
+                        {{-- 投稿内容 --}}
+                        <p class="my-0 py-0.1 px-5">{!! nl2br(e($micropost->content)) !!}</p>
+                        <div class="flex items-start">
+                            @if (Auth::check())
+                                @include('favorite.favorite_button', ['micropost' => $micropost])
+                            @endif
                             @if (Auth::id() == $micropost->user_id)
                                 {{-- 投稿削除ボタンのフォーム --}}
                                 <form method="POST" action="{{ route('microposts.destroy', $micropost->id) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-error btn-sm normal-case" 
+                                    <style>
+                                       .custom-margin-left {
+                                         margin-left: -4rem;
+                                       }
+                                    </style>
+                                    <button type="submit" class="btn btn-error btn-sm normal-case custom-margin-left mt-1" 
                                         onclick="return confirm('Delete id = {{ $micropost->id }} ?')">Delete</button>
                                 </form>
                             @endif
