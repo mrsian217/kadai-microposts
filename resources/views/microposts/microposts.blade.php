@@ -17,7 +17,7 @@
                         </div>
                         {{-- 投稿内容 --}}
                         <p class="my-0 py-0.1 px-5">{!! nl2br(e($micropost->content)) !!}</p>
-                        <div class="flex items-start">
+                        <div class="flex space-x-2 justify-between">
                             @if (Auth::check())
                                 @include('favorite.favorite_button', ['micropost' => $micropost])
                             @endif
@@ -26,12 +26,8 @@
                                 <form method="POST" action="{{ route('microposts.destroy', $micropost->id) }}">
                                     @csrf
                                     @method('DELETE')
-                                    <style>
-                                       .custom-margin-left {
-                                         margin-left: -4rem;
-                                       }
-                                    </style>
-                                    <button type="submit" class="btn btn-error btn-sm normal-case custom-margin-left mt-1" 
+                                    
+                                    <button type="submit" class="btn btn-error btn-sm normal-case  ml-1 mt-1" 
                                         onclick="return confirm('Delete id = {{ $micropost->id }} ?')">Delete</button>
                                 </form>
                             @endif
