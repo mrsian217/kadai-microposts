@@ -9,7 +9,7 @@
         @else
             <form method="POST" action="{{ route('favorites.favorite', $micropost->id) }}">
                 @csrf
-                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-full">Favorite</button>
+                <button type="submit" class="bg-green-500 text-white px-4 py-2  rounded-full">Favorite</button>
             </form>
 　　　　@endif   
 @endif

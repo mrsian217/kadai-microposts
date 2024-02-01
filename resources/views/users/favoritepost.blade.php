@@ -1,6 +1,6 @@
-@if (isset($favorites))
+@if (isset($microposts))
     <ul class="list-none">
-        @foreach ($favorites as $micropost)
+        @foreach ($microposts as $micropost)
             <li class="flex items-start gap-x-2 mb-4">
                     {{-- 投稿の所有者のメールアドレスをもとにGravatarを取得して表示 --}}
                     <div class="avatar">
@@ -23,6 +23,6 @@
         　　　
         @endforeach
     </ul>
- {{ $favorites->links() }}
+ {{ $microposts->links() }}
 
 @endif
